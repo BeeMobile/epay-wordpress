@@ -1,0 +1,199 @@
+# WordPress Blank Pot
+# Copyright (C) 2014 ...
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Woocommerce Kkb plugin v1.0.0\n"
+"Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
+"POT-Creation-Date: 2015-02-08 19:53+0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Mirzhan <merzh23@gmail.com>\n"
+"Language-Team: bemobile <merzh23@gmail.com>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: gateway-kkb.php:73
+msgid "Kazakhstan tenge"
+msgstr "Казахстан тенге"
+
+#: classes/kkb.class.php:9
+msgid "Kkb"
+msgstr "Epay.kkb.kz"
+
+#: classes/kkb.class.php:95
+msgid "Enable/Disable"
+msgstr "Включить/Выключить"
+
+#: classes/kkb.class.php:96
+msgid "Enable Epay.kkb.kz"
+msgstr "Включит Epay.kkb.kz"
+
+#: classes/kkb.class.php:98
+msgid ""
+"This controls whether or not this gateway is enabled within WooCommerce."
+msgstr "Это контролирует  включен ли этот шлюз  в WooCommerce."
+
+#: classes/kkb.class.php:102
+msgid "Title"
+msgstr "Заголовок"
+
+#: classes/kkb.class.php:104
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+"Это контролирует заголовок, который пользователь видит во время проверки."
+
+#: classes/kkb.class.php:105 classes/kkb.class.php:237
+msgid "Epay.kkb.kz"
+msgstr "Epay.kkb.kz"
+
+#: classes/kkb.class.php:108
+msgid "Description"
+msgstr "Описание"
+
+#: classes/kkb.class.php:110
+msgid "This controls the description which the user sees during checkout."
+msgstr ""
+"Это контролирует описание, которое пользователь видит во время проверки."
+
+#: classes/kkb.class.php:114
+msgid "Sandbox"
+msgstr "Тестовый режим"
+
+#: classes/kkb.class.php:116
+msgid "Place the payment gateway in development mode."
+msgstr "Включает режим разработки."
+
+#: classes/kkb.class.php:120
+msgid "Shop/merchant id"
+msgstr "Номер магазина/продавца"
+
+#: classes/kkb.class.php:122
+msgid "This is the merchant ID, received from kkb."
+msgstr "Это  номер магазина, полученный от Epay.kkb.kz."
+
+#: classes/kkb.class.php:126
+msgid "Shop/merchant Name"
+msgstr "Название магазина/продавца"
+
+#: classes/kkb.class.php:128
+msgid "This is the merchant name, received from kkb."
+msgstr "Это название магазина, полученный от Epay.kkb.kz."
+
+#: classes/kkb.class.php:132
+msgid "Certificate Serial Number"
+msgstr "Серийный номер сертификата"
+
+#: classes/kkb.class.php:134
+msgid "This is the certificate id, received from kkb."
+msgstr "Это серийный номер сертификата, полученный от Epay.kkb.kz."
+
+#: classes/kkb.class.php:138
+msgid "Private certificate"
+msgstr "Файл с закрытым ключом"
+
+#: classes/kkb.class.php:140
+msgid "Choose private certificate"
+msgstr "Выберите файл с закрытым ключом"
+
+#: classes/kkb.class.php:146
+msgid "Private certificate password"
+msgstr "Пароль к закрытому ключу"
+
+#: classes/kkb.class.php:148
+msgid "This is the private certificate password, received from kkb."
+msgstr "Это пароль к закрытому ключу, полученный от Epay.kkb.kz."
+
+#: classes/kkb.class.php:153
+msgid "Approve payment method"
+msgstr "Метод подтверждения платежа"
+
+#: classes/kkb.class.php:155
+msgid "Choose approve payment method"
+msgstr "Выберите метод подтверждения платежа"
+
+#: classes/kkb.class.php:159
+msgid "Automatic"
+msgstr "Автоматический"
+
+#: classes/kkb.class.php:160
+msgid "Manual"
+msgstr "Ручной"
+
+#: classes/kkb.class.php:165
+msgid "Log"
+msgstr "Логирование"
+
+#: classes/kkb.class.php:167
+msgid "Enable logging"
+msgstr "Включить логирование"
+
+#: classes/kkb.class.php:238
+#, php-format
+msgid ""
+"Eay.kkb.kz works by sending the user to %sEpay.kkb.kz%s to enter their "
+"payment information."
+msgstr "Работает через  редирект пользователю на сайт %sEpay.kkb.kz%s."
+
+#: classes/kkb.class.php:248
+msgid "Gateway Disabled"
+msgstr "Плагин отключен."
+
+#: classes/kkb.class.php:248
+msgid ""
+"Choose Kazakhstan tenge as your store currency in \"Currency Options\" to "
+"enable the Epay.kkb.kz Gateway."
+msgstr ""
+"Выберите тенге в качестве вашего валюты магазина , чтобы включит плагин."
+
+#: classes/kkb.class.php:310
+msgid "Pay via Epay.kkb.kz"
+msgstr "Оплатить через Epay.kkb.kz"
+
+#: classes/kkb.class.php:310
+msgid "Cancel order &amp; restore cart"
+msgstr "Отменить заказ "
+
+#: classes/kkb.class.php:315
+msgid ""
+"Thank you for your order. We are now redirecting you to epay.kkb.kz to make "
+"payment."
+msgstr ""
+"Спасибо за ваш заказ. Мы сейчас редиректим вас на epay.kkb.kz  чтобы "
+"произвести платеж."
+
+#: classes/kkb.class.php:361
+msgid ""
+"Thank you for your order, please click the button below to pay with kkb."
+msgstr ""
+"Спасибо за ваш заказ, пожалуйста, нажмите на кнопку ниже, чтобы оплатить."
+
+#: classes/kkb.class.php:468
+msgid "kkb payment completed"
+msgstr "Epay.kkb.kz: оплата завершена"
+
+#: classes/kkb.class.php:472
+msgid "Payment on-hold via kkb."
+msgstr "Epay.kkb.kz: деньги заблокированы на карточке клиента."
+
+#: classes/kkb.class.php:475
+msgid "Payment error via kkb."
+msgstr "Epay.kkb.kz: Ошибка транзакции."
+
+#: classes/kkb.class.php:637
+msgid "Payment approved via kkb"
+msgstr "Epay.kkb.kz: деньги переведены на счет продавца"
+
+#: classes/kkb.class.php:669
+msgid "Payment refunded via kkb"
+msgstr "Epay.kkb.kz: деньги возвращены клиенту."
