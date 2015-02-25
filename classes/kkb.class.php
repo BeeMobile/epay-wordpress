@@ -540,7 +540,8 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 
 	function getDataDirectory()
 	{
-		$data_dir = ABSPATH . 'wp-content/plugins/woocommerce-gateway-kkb/data/';
+		$data_dir = __DIR__ .'/../data/';
+		//$data_dir = ABSPATH . 'wp-content/plugins/woocommerce-gateway-kkb/data/';
 		return $data_dir;
 	}
 
