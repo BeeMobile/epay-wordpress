@@ -4,7 +4,7 @@
 	Plugin URI: http://woocommerce.com/
 	Description: A payment gateway for epay.kkb.kz payment system, Kkb.
 	Version: 1.0.0
-	Author: Kuanshaliyev Mirzhan
+	Author: BeeMobile
 	Author URI: http://woothemes.com/
 	Requires at least: 3.5
 	Tested up to: 3.8
