@@ -12,7 +12,68 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
         $this->debug_email 	= get_option( 'admin_email' );
 
 		// Setup available currency codes.
-		$this->available_currencies = array( 'KZT');
+		$this->available_currencies = array( 'KZT', 'RUB', 'USD');
+
+//		'AED' => string 'United Arab Emirates Dirham' (length=27)
+//  'AUD' => string 'Australian Dollars' (length=18)
+//  'BDT' => string 'Bangladeshi Taka' (length=16)
+//  'BRL' => string 'Brazilian Real' (length=14)
+//  'BGN' => string 'Bulgarian Lev' (length=13)
+//  'CAD' => string 'Canadian Dollars' (length=16)
+//  'CLP' => string 'Chilean Peso' (length=12)
+//  'CNY' => string 'Chinese Yuan' (length=12)
+//  'COP' => string 'Colombian Peso' (length=14)
+//  'CZK' => string 'Czech Koruna' (length=12)
+//  'DKK' => string 'Danish Krone' (length=12)
+//  'DOP' => string 'Dominican Peso' (length=14)
+//  'EUR' => string 'Euros' (length=5)
+//  'HKD' => string 'Hong Kong Dollar' (length=16)
+//  'HRK' => string 'Croatia kuna' (length=12)
+//  'HUF' => string 'Hungarian Forint' (length=16)
+//  'ISK' => string 'Icelandic krona' (length=15)
+//  'IDR' => string 'Indonesia Rupiah' (length=16)
+//  'INR' => string 'Indian Rupee' (length=12)
+//  'NPR' => string 'Nepali Rupee' (length=12)
+//  'ILS' => string 'Israeli Shekel' (length=14)
+//  'JPY' => string 'Japanese Yen' (length=12)
+//  'KIP' => string 'Lao Kip' (length=7)
+//  'KRW' => string 'South Korean Won' (length=16)
+//  'MYR' => string 'Malaysian Ringgits' (length=18)
+//  'MXN' => string 'Mexican Peso' (length=12)
+//  'NGN' => string 'Nigerian Naira' (length=14)
+//  'NOK' => string 'Norwegian Krone' (length=15)
+//  'NZD' => string 'New Zealand Dollar' (length=18)
+//  'PYG' => string 'Paraguayan Guaraní' (length=19)
+//  'PHP' => string 'Philippine Pesos' (length=16)
+//  'PLN' => string 'Polish Zloty' (length=12)
+//  'GBP' => string 'Pounds Sterling' (length=15)
+//  'RON' => string 'Romanian Leu' (length=12)
+//  'RUB' => string 'Russian Ruble' (length=13)
+//  'SGD' => string 'Singapore Dollar' (length=16)
+//  'ZAR' => string 'South African rand' (length=18)
+//  'SEK' => string 'Swedish Krona' (length=13)
+//  'CHF' => string 'Swiss Franc' (length=11)
+//  'TWD' => string 'Taiwan New Dollars' (length=18)
+//  'THB' => string 'Thai Baht' (length=9)
+//  'TRY' => string 'Turkish Lira' (length=12)
+//  'USD' => string 'US Dollars' (length=10)
+//  'VND' => string 'Vietnamese Dong' (length=15)
+//  'EGP' => string 'Egyptian Pound' (length=14)
+//  'KZT' => string 'Kazakhstan tenge' (length=16)
+//
+//		<currency code="156">CNY</currency>
+//<currency code="356">INR</currency>
+//<currency code="398">KZT</currency>
+//<currency code="410">KRW</currency>
+//<currency code="417">KGS</currency>
+//<currency code="764">THB</currency>
+//<currency code="784">AED</currency>
+//<currency code="810">RUR</currency>
+//<currency code="826">GBP</currency>
+//<currency code="840">USD</currency>
+//<currency code="972">TJS</currency>
+//<currency code="978">EUR</currency>
+//<currency code="344">HKD</currency>
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -216,7 +277,10 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
         $user_currency = get_option( 'woocommerce_currency' );
 
         $is_available_currency = in_array( $user_currency, $this->available_currencies );
-
+//		var_dump($user_currency);
+//
+//		var_dump($is_available_currency);
+//		exit();
 		if ( $is_available_currency)
 			$is_available = true;
 
@@ -274,7 +338,23 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 		$order = new WC_Order( $order_id );
 
 		$helper = $this->getKkbHelper();
-		$currency_id = '398';
+		//$currency_id = '398';
+
+		$user_currency = get_option( 'woocommerce_currency' );
+		switch($user_currency)
+		{
+			case 'KZT':
+				$currency_id = '398';
+				break;
+			case 'RUB':
+				$currency_id = '810';
+				break;
+			case 'USD':
+				$currency_id = '840';
+				break;
+			break;
+		}
+
 		$content = $helper->process_request($order->id, $currency_id, $order->order_total, false);
 
 		// Construct variables for post
