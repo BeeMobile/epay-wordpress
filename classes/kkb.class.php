@@ -105,7 +105,7 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 			$this->add_testmode_admin_settings_notice();
 			$this->url = 'https://testpay.kkb.kz/jsp/process/logon.jsp';
 			$this->approve_url = 'https://testpay.kkb.kz/jsp/remote/control.jsp';
-			$this->approve_url = 'https://epay.kkb.kz/jsp/remote/control.jsp';
+			//$this->approve_url = 'https://epay.kkb.kz/jsp/remote/control.jsp';
 
 			$this->merchant_id = '92061101';
 			$this->merchant_name = 'Test shop';
@@ -116,7 +116,7 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 		}
 
 		$this->response_url	= add_query_arg( 'wc-api', 'WC_Gateway_Kkb', home_url( '/' ) );
-		$this->response_url	= add_query_arg( 'wc-api', 'WC_Gateway_Kkb', 'http://f75f0509.ngrok.io' );
+		//$this->response_url	= add_query_arg( 'wc-api', 'WC_Gateway_Kkb', 'http://f75f0509.ngrok.io' );
 
 		add_action( 'woocommerce_api_wc_gateway_kkb', array( $this, 'check_itn_response' ) );
 		add_action( 'valid-kkb-standard-itn-request', array( $this, 'successful_request' ) );
