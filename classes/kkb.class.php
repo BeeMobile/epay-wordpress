@@ -98,10 +98,14 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 		$this->title = $this->settings['title'];
 		$this->approve_method = $this->settings['approve_method'];
 
+		$this->approve_url = 'https://epay.kkb.kz/jsp/remote/control.jsp';
+
 		// Setup the test data, if in test mode.
 		if ( $this->settings['testmode'] == 'yes' ) {
 			$this->add_testmode_admin_settings_notice();
-			$this->url = 'http://3dsecure.kkb.kz/jsp/process/logon.jsp';
+			$this->url = 'https://testpay.kkb.kz/jsp/process/logon.jsp';
+			$this->approve_url = 'https://testpay.kkb.kz/jsp/remote/control.jsp';
+			$this->approve_url = 'https://epay.kkb.kz/jsp/remote/control.jsp';
 
 			$this->merchant_id = '92061101';
 			$this->merchant_name = 'Test shop';
@@ -112,7 +116,7 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 		}
 
 		$this->response_url	= add_query_arg( 'wc-api', 'WC_Gateway_Kkb', home_url( '/' ) );
-		//$this->response_url	= add_query_arg( 'wc-api', 'WC_Gateway_Kkb', 'http://1b8af1ef.ngrok.com/' );
+		$this->response_url	= add_query_arg( 'wc-api', 'WC_Gateway_Kkb', 'http://f75f0509.ngrok.io' );
 
 		add_action( 'woocommerce_api_wc_gateway_kkb', array( $this, 'check_itn_response' ) );
 		add_action( 'valid-kkb-standard-itn-request', array( $this, 'successful_request' ) );
@@ -355,7 +359,7 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 			break;
 		}
 
-		$content = $helper->process_request($order->id, $currency_id, $order->order_total, false);
+		$content = $helper->process_request($order->id . '0000' , $currency_id, $order->order_total, false);
 
 		// Construct variables for post
 	    $data_to_send = array(
@@ -508,7 +512,7 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 			echo 'error';
 			exit();
 		}
-		$order = new WC_Order( $order_id );
+		$order = new WC_Order( substr($order_id, 0, 2));
 
 
 
@@ -603,7 +607,8 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
             if( !$fh ) {
                 $pathinfo = pathinfo( __FILE__ );
                 $dir = str_replace( '/classes', '/logs', $pathinfo['dirname'] );
-                $fh = @fopen( $dir .'/kkb.log', 'a' );
+
+                $fh = fopen( $dir .'/kkb.log', 'a' );
             }
 
             // If file was successfully created
@@ -628,10 +633,12 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 
 	function approvePayment($result, $order)
 	{
+
 		$helper = $this->getKkbHelper();
 		$xml = $helper->process_complete($result['PAYMENT_REFERENCE'], $result['PAYMENT_APPROVAL_CODE'], (int)$result['ORDER_ORDER_ID'], $result['ORDER_CURRENCY'], $result['PAYMENT_AMOUNT']);
 
-		$url = 'http://3dsecure.kkb.kz/jsp/remote/control.jsp';
+		$url = $this->approve_url;
+
 		$message = "_sendRequest: \n url: $url \n xml: $xml \n";
 		$this->log($message);
 
@@ -641,16 +648,20 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 
 		$this->log(trim($response) . "\n");
 
+
+		$res = $helper->process_response($response);
+
 		if ($response) {
 			update_post_meta( $order->id, 'kkb_approveresponse', wp_slash(json_encode($result)) );
 		}
 
-		if (strpos(strtolower($response), 'error'))
+		if (isset($res['RESPONSE_CODE']) && $res['RESPONSE_CODE'] == '00')
 		{
-			$success =  0;
-		} else {
 			$success = 1;
 			$order->add_order_note( __( 'Payment approved via kkb', 'woocommerce-gateway-kkb' ) );
+
+		} else {
+			$success =  0;
 		}
 
 
@@ -662,7 +673,7 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 		$helper = $this->getKkbHelper();
 		$xml = $helper->process_refund($result['PAYMENT_REFERENCE'], $result['PAYMENT_APPROVAL_CODE'], (int)$result['ORDER_ORDER_ID'], $result['ORDER_CURRENCY'], $result['PAYMENT_AMOUNT'], '');
 
-		$url = 'http://3dsecure.kkb.kz/jsp/remote/control.jsp';
+		$url = $this->approve_url;
 
 		$message = "_sendRequest: \n url: $url \n xml: $xml \n";
 		$this->log($message);
@@ -673,16 +684,22 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 
 		$this->log(trim($response) . "\n");
 
+
+		$res = $helper->process_response($response);
+
 		if ($response) {
 			update_post_meta( $order->id, 'kkb_refundresponse', wp_slash(json_encode($result)) );
 		}
 
-		if (strpos(strtolower($response), 'error'))
+
+
+		if ($res['RESPONSE_CODE'] == '00')
 		{
-			$success =  0;
-		} else {
-			$success = 1;
+			$success =  1;
 			$order->add_order_note( __( 'Payment refunded via kkb', 'woocommerce-gateway-kkb' ) );
+		} else {
+			$success = 0;
+
 		}
 
 

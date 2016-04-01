@@ -376,6 +376,11 @@ class KkbHelper
     public function request($url)
     {
 
+        $pathinfo = pathinfo( __FILE__ );
+        $dir = str_replace( '/classes', '/logs', $pathinfo['dirname'] );
+
+        //$fOut = fopen( $dir .'/testcurl.txt', 'w' );
+
         //$fOut = fopen('/home/kiwi/external/testcurl.txt', "w" );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url); // set url to post to
@@ -385,7 +390,12 @@ class KkbHelper
         curl_setopt($ch, CURLOPT_TIMEOUT, 3); // times out after 4s
         //curl_setopt($ch, CURLOPT_STDERR, $fOut );
         //curl_setopt($ch, CURLOPT_VERBOSE, 1);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
+        //curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        //curl_setopt($ch, CURLOPT_SSLVERSION, 2);
+
+
         $result = curl_exec($ch); // run the whole process
         curl_close($ch);
 
