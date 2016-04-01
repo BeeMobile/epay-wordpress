@@ -359,7 +359,7 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 			break;
 		}
 
-		$content = $helper->process_request($order->id . '0000' , $currency_id, $order->order_total, false);
+		$content = $helper->process_request($order->id  , $currency_id, $order->order_total, false);
 
 		// Construct variables for post
 	    $data_to_send = array(
@@ -512,7 +512,8 @@ class WC_Gateway_Kkb extends WC_Payment_Gateway {
 			echo 'error';
 			exit();
 		}
-		$order = new WC_Order( substr($order_id, 0, 2));
+		//$order = new WC_Order( substr($order_id, 0, 2));
+		$order = new WC_Order( $order_id);
 
 
 
